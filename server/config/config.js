@@ -7,6 +7,7 @@ Os arquivos do diretorio ./env/ também irão conter configuracoes conforme as v
 */
 module.exports = function(){
 	if(process.env.NODE_ENV ){
+		console.log(process.env.NODE_ENV)
     	return require('./env/'+ process.env.NODE_ENV + '.js')
 	}else{
 		return require('./env/desenvolvimento.js')

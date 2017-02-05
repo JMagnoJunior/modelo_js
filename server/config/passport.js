@@ -5,6 +5,8 @@ var passport = require('passport');
 FacebookStrategy = require('passport-facebook').Strategy;
 var mongoose = require('mongoose');
 
+
+
 module.exports = function() {
 
     //ESSE CODIGO É PARA FAZER LOGIN PELO GITHUB!

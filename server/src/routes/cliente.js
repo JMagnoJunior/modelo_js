@@ -11,10 +11,10 @@ module.exports = function(app) {
   var controller = app.controllers.cliente;
 
   app.route('/clientes')
-  // .get( controller.listaClientes)
-  // .post( controller.salvaCliente);
-  .get( verificaAutenticacao, controller.listaClientes)
-  .post( verificaAutenticacao, controller.salvaCliente);
+  .get( controller.listaClientes)
+  .post( controller.salvaCliente);
+  // .get( verificaAutenticacao, controller.listaClientes)
+  // .post( verificaAutenticacao, controller.salvaCliente);
     // .get(verificaAutenticacao, controller.listaClientes)
     // .post(verificaAutenticacao, controller.salvaContato);
 
