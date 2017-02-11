@@ -6,12 +6,13 @@ var sanitize = require('mongo-sanitize')
 module.exports = function(app) {
 
     var Empresa = app.models.Empresa;
+    var Fila = app.models.Fila;
 
     var controller = {};
 
     controller.listaEmpresas = function(req, res){
-    	// mpromisse, default do mongoose foi descontinuado. precisamos alterar para o q
-        Empresa.find().exec()
+    	// mpromisse, default do mongoose foi descontinuado. precisamos alterar para o q        
+        Empresa.query.all()
 	        .then(function(empresa){
 	        	res.json(empresa);
 	        },
@@ -22,12 +23,43 @@ module.exports = function(app) {
         );
     };
 
+    controller.listaFilasDaEmpresa = function(req, res){
+    	// mpromisse, default do mongoose foi descontinuado. precisamos alterar para o q       
+        var id = req.params.id;
+        
+        Empresa.query.filasDaEmpresa(id) 
+	        .then(function(empresa){
+                if(!empresa){
+                    res.json({});
+                }else{
+                    res.json(empresa._filas)
+                }
+	        },
+	        function(erro){
+	        	console.log(erro);
+	        	res.status(500).json(erro);
+	        }
+        );
+    };
+
+     controller.criaFilaParaEmpresa = function(req, res){
+        
+        var id = req.params.id;
+        var dados = {
+            "nome":  req.body.nome,
+            "tipo": req.body.tipo
+        };
+        Empresa.add.fila(id, dados, function(fila){
+            res.status(200).json(fila)
+        }, function(error){
+            res.status(500).json(error)
+        })
+
+    }
+
     // cadastra ou atualiza
     controller.salvaEmpresa = function(req, res){
 
-        console.log("aqu aquii")
-
-        console.log(req.body.nome)
         var _id = req.body._id;
 
         // fazendo dessa forma evitamos o document replace
