@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+// var findOrCreate = require('findorcreate-promise')
 
 // este modulo retorna uma collection  do banco que utiliza o schema definido.
 module.exports = function() {
@@ -10,7 +11,22 @@ module.exports = function() {
       }
     });
 
-    Pessoa =  mongoose.model('Pessoa', schema);
+    schema.statics.entraNaFila = function(identificador_pessoal){
+      return this.findOne({"identificador_pessoal": identificador_pessoal}).exec().then(function(result){
+        if(!result){
+          var instance = new Pessoa();
+          instance.identificador_pessoal = identificador_pessoal   
+          return instance.save()
+        }else{          
+          return result
+        }
+      })
+    }
+
+    
+  
+    var Pessoa =  mongoose.model('Pessoa', schema);
+  
     // Pessoa.queryoradd = {}
     // Pessoa._foiEncontrada = function(result){
     //   if(!result){
