@@ -7,7 +7,11 @@ var mongoose = require('mongoose');
 module.exports = function(uri) {
 
     // essa configuracao deve mudar para ambiente de PRODUCAO
-    mongoose.set('debug',true);
+    if(process.env.NODE_ENV === "producao" || process.env.NODE_ENV === "teste"){
+      mongoose.set('debug',false);
+    } else{
+      mongoose.set('debug',true);
+    }
 
     // para conectar em varios bancos, ver: mongoose.createConnection(uri)
     // por padrao o mongoose cria um pool com 5 conexoes. Aqui alterei para 15

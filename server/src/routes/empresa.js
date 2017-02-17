@@ -10,12 +10,12 @@ module.exports = function(app) {
   
   var controller = app.controllers.empresa;
 
-  app.route('/empresas')
-  .get(controller.listaEmpresas)
-  .post(controller.salvaEmpresa);
+  // app.route('/empresas')
+  // .get(controller.listaEmpresas)
+  // .post(controller.salvaEmpresa);
 
-  app.route('/empresas/:id/filas')
-  .get(controller.listaFilasDaEmpresa)
-  .post(controller.criaFilaParaEmpresa);
+  // app.route('/empresas/:id/filas')
+  // .get(controller.listaFilasDaEmpresa)
+  // .post(controller.criaFilaParaEmpresa);
   
 };

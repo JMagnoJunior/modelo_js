@@ -10,8 +10,8 @@ module.exports = function(app) {
   
   var controller = app.controllers.fila;
 
-  app.route('/filas/:id_fila/posicoes')
-  .post(controller.entraNaFila);
+  // app.route('/filas/:id_fila/posicoes')
+  // .post(controller.entraNaFila);
 
   
 };

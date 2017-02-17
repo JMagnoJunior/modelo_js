@@ -6,78 +6,36 @@ var mongoose = require('mongoose')
 
 
 describe('model.Pessoa', function () {
-    var server;
-    var Pessoa;
+    // var server;
+    // var Pessoa;
+
+    // before(function () {
+    //     server = require('../../server');                
+    //     // Pessoa = server._events.request.models.Pessoa; 
+    //     // prepara_massa_dados(done);            
+    // });
+
+    // after(function () {
+    //     server.close();
+    // });  
+
+    // function prepara_massa_dados(done){
+    //     Pessoa.remove().then(function(){
+    //          Pessoa.create({"identificador_pessoal" : "existente"}, function(err){done(err)})
+    //     })
+    // }
 
     
-    beforeEach(function (done) {
-        server = require('../../server');                
-        Pessoa = server._events.request.models.Pessoa; 
-        prepara_massa_dados(done);        
-    });
-
-    afterEach(function () {
-        server.close();
-    });
    
-    describe('Pessoa.queryoradd.porIdentificadorPessoal deve adicionar uma Pessoa por identificador pessoal quando ela nao existir', function porIdentificadorPessoal(done) {
-     
- 
-        it('a pessoa informada nao deve existir', function(done){        
-            Pessoa.find({"identificador_pessoal": "123"}).then(function(result){
-                expect(result).to.be.empty
-                done()
-            }).catch( function(erro){ done(erro) })
-        });
-      
-        it('a pessoa informada deve ser adicionada', function(done){  
-            Pessoa.queryoradd.porIdentificadorPessoal("123", 
-                    function(pessoa){
-                        expect(pessoa.identificador_pessoal).to.equal("123")
-                        done();                
-                    }, function(error){        
-                        done(error);
-                    }
-                )
-        });
-        
+    describe('Pessoa.entraNaFila - Ao entrar na fila uma nova pessoa deve ser adicionada se nao existir ou os seus dados devem ser recuperados, se existir ', function porIdentificadorPessoal(done) {
+    
+        it('A pessoa deve ser adicionada se nao existir')      
+        it('A mesma pessoa nao pode ser adicionada duas vezes')
+        it('Se a pessoa já existir na fila, seus dados serao retornados')
+                
     });
 
-        describe('Pessoa.queryoradd.porIdentificadorPessoal deve retornar uma Pessoa por identificador pessoal quando ela  existir', function porIdentificadorPessoal(done) {
-     
  
-        it('a pessoa informada deve existir', function(done){        
-            Pessoa.find({"identificador_pessoal": "existente"}).then(function(result){
-                expect(result).not.to.be.empty
-                done()
-            }).catch( function(erro){ done(erro) })
-        });
-      
-        it('a pessoa informada deve ser retornada pelo método sem uma nova adicao', function(done){  
-            Pessoa.queryoradd.porIdentificadorPessoal("123", 
-                    function(pessoa){
-                        expect(pessoa.identificador_pessoal).to.equal("123")
-                        done();                
-                    }, function(error){        
-                        done(error);
-                    }
-                )
-        });
-
-        it('deve continuar existindo somente uma pessoa', function(done){        
-            Pessoa.find({"identificador_pessoal": "existente"}).then(function(result){
-                expect(result.length).to.equal(1)
-                done()
-            }).catch( function(erro){ done(erro) })
-        });
-        
-    });
-
-    function prepara_massa_dados(done){
-        Pessoa.remove().then(function(){
-             Pessoa.create({"identificador_pessoal" : "existente"}, function(err){done(err)})
-        })
-    }
 
 
 });
