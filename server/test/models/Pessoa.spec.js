@@ -12,16 +12,16 @@ describe('model.Pessoa', function () {
     // var server;
     // var Pessoa;
 
-    before(function (done) {
-        // server = require('../../server');                
-        // Pessoa = server._events.request.models.Pessoa; 
-        // prepara_massa_dados(done);
+    // before(function (done) {
+    //     // server = require('../../server');                
+    //     // Pessoa = server._events.request.models.Pessoa; 
+    //     // prepara_massa_dados(done);
 
-        Pessoa.remove({}).then(function(){
-            done()
-        })
+    //     Pessoa.remove({}).then(function(){
+    //         done()
+    //     })
         
-    });
+    // });
 
     // after(function () {
     //     server.close();

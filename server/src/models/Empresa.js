@@ -36,7 +36,29 @@ module.exports = function() {
       }]
     });
 
+    schema.methods.listaFilas = function(){
+      that = this
+      return new Promise(function(sucess, error){
+        
+         that.model('Empresa').findOne({"_id": that._id}).populate("_filas").exec(function(err, result){
+           
+           if(!result){
+            error("a empresa não existe")
+           }else{
+             
+            sucess(result._filas)
+           }
+           
+        })
+        //   this.model('Empresa').findOne({"_id": empresa_id}).then(function(result){          
+        //    return  error("a empresa não existe")
+        // }).catch(function(er){ error("a empresa não existe")})
+      })
+    }
+
     var Empresa = mongoose.model('Empresa', schema);
+
+
     // Empresa.query = {}
     // Empresa.add = {}
 

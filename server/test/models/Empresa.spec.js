@@ -4,10 +4,14 @@ var sinon = require('sinon');
 var mongoose = require('mongoose')
 
 
-describe('model.Empresa', function () {
-    var server;
-    var Empresa;
+require('../../config/database.js')("mongodb://localhost/querocomprar_test"); 
+var mongoose = require('mongoose')
 
+var Empresa = require('../../src/models/Empresa')()
+var Fila = require('../../src/models/Fila')()
+
+describe('model.Empresa', function () {
+    
     // before(function (done) {
     //     server = require('../../server');                
     //     Empresa = server._events.request.models.Empresa; 
@@ -24,9 +28,51 @@ describe('model.Empresa', function () {
     //     })
     // }
 
-    describe('Empresa.listaFilas - Deve listar todas as filas da empresa', function porIdentificadorPessoal(done) {
-        it('deve retornar a mensagem "a empresa não existe" se for informado um código de empresa inválido')
-        it('deve retornar todas as filas da empresa quando houver filas na empresa')
+    describe('Empresa.listaFilas - Deve listar todas as filas da empresa', function listaFilas() {
+        it('deve retornar a mensagem "a empresa não existe" se for informado um código de empresa inválido', function(){
+
+            var mensagem = "a empresa não existe"
+            var empresa = new Empresa()
+
+            empresa._id = 123
+            return empresa.listaFilas().then(function(result){
+                
+            }).catch(function(error){
+                expect(mensagem).to.equal(error)
+            })
+        })
+        it.only('deve retornar todas as filas da empresa quando houver filas na empresa', function(){
+            var empresa = new Empresa()
+            
+            empresa.nome = "Empresa teste"
+
+            var fila1 = new Fila()
+            fila1.nome = "TESTE"
+            fila1.tipo = "sequencial"
+
+            return fila1.save().then(function(){
+                empresa._filas.push(fila1._id)
+                return empresa.save().then(function(){
+
+                    return empresa.listaFilas().then(function(result){
+                        expect(fila1.nome).to.equal(result[0].nome)
+                        expect(fila1.tipo).to.equal(result[0].tipo)
+                    })
+                })
+            })
+
+            // empresa.nome = "teste"
+            // return empresa.save().then(function(){
+            //     return empresa.listaFilas().then(function(result){
+            //         expect(fila).to.equal(result)
+            //     })
+            // })
+            // Empresa.create({"nome": "teste"}).then(function(){
+            //     Empresa.findOne({"nome": "teste"}).then(function(result){
+            //         result 
+            //     })
+            // })
+        })
         it('deve retornar um array vazio quando não houver filas na empresa')        
     });
 
