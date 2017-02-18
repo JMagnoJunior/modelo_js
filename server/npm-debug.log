@@ -77,36 +77,36 @@
 60 verbose addNameTag registry:https://registry.npmjs.org/mongoose-findorcreate-promise not in flight; fetching
 61 verbose request uri https://registry.npmjs.org/mongoose-findorcreate-promise
 62 verbose request no auth needed
-63 info attempt registry request try #1 at 3:10:14 PM
-64 verbose request id 794342b40be9ad97
+63 info attempt registry request try #1 at 11:06:27 AM
+64 verbose request id 8d2ce4cdfebbd6a5
 65 http request GET https://registry.npmjs.org/mongoose-findorcreate-promise
 66 http 404 https://registry.npmjs.org/mongoose-findorcreate-promise
 67 verbose headers { 'content-type': 'application/json',
 67 verbose headers   'cache-control': 'max-age=0',
 67 verbose headers   'content-length': '2',
 67 verbose headers   'accept-ranges': 'bytes',
-67 verbose headers   date: 'Fri, 17 Feb 2017 17:10:14 GMT',
+67 verbose headers   date: 'Sat, 18 Feb 2017 13:06:28 GMT',
 67 verbose headers   via: '1.1 varnish',
 67 verbose headers   age: '0',
 67 verbose headers   connection: 'keep-alive',
 67 verbose headers   'x-served-by': 'cache-gru7120-GRU',
 67 verbose headers   'x-cache': 'MISS',
 67 verbose headers   'x-cache-hits': '0',
-67 verbose headers   'x-timer': 'S1487351413.997951,VS0,VE389',
+67 verbose headers   'x-timer': 'S1487423187.472093,VS0,VE975',
 67 verbose headers   vary: 'Accept-Encoding' }
 68 silly get cb [ 404,
 68 silly get   { 'content-type': 'application/json',
 68 silly get     'cache-control': 'max-age=0',
 68 silly get     'content-length': '2',
 68 silly get     'accept-ranges': 'bytes',
-68 silly get     date: 'Fri, 17 Feb 2017 17:10:14 GMT',
+68 silly get     date: 'Sat, 18 Feb 2017 13:06:28 GMT',
 68 silly get     via: '1.1 varnish',
 68 silly get     age: '0',
 68 silly get     connection: 'keep-alive',
 68 silly get     'x-served-by': 'cache-gru7120-GRU',
 68 silly get     'x-cache': 'MISS',
 68 silly get     'x-cache-hits': '0',
-68 silly get     'x-timer': 'S1487351413.997951,VS0,VE389',
+68 silly get     'x-timer': 'S1487423187.472093,VS0,VE975',
 68 silly get     vary: 'Accept-Encoding' } ]
 69 verbose stack Error: Registry returned 404 for GET on https://registry.npmjs.org/mongoose-findorcreate-promise
 69 verbose stack     at makeError (/usr/local/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:264:12)

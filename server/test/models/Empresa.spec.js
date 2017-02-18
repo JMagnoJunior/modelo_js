@@ -41,7 +41,7 @@ describe('model.Empresa', function () {
                 expect(mensagem).to.equal(error)
             })
         })
-        it.only('deve retornar todas as filas da empresa quando houver filas na empresa', function(){
+        it('deve retornar todas as filas da empresa quando houver filas na empresa', function(){
             var empresa = new Empresa()
             
             empresa.nome = "Empresa teste"
@@ -61,19 +61,18 @@ describe('model.Empresa', function () {
                 })
             })
 
-            // empresa.nome = "teste"
-            // return empresa.save().then(function(){
-            //     return empresa.listaFilas().then(function(result){
-            //         expect(fila).to.equal(result)
-            //     })
-            // })
-            // Empresa.create({"nome": "teste"}).then(function(){
-            //     Empresa.findOne({"nome": "teste"}).then(function(result){
-            //         result 
-            //     })
-            // })
         })
-        it('deve retornar um array vazio quando não houver filas na empresa')        
+        it('deve retornar um array vazio quando não houver filas na empresa', function(){
+            var empresa = new Empresa()
+            
+            empresa.nome = "Empresa teste"
+            return empresa.save().then(function(){
+                return empresa.listaFilas().then(function(result){
+                    expect(result).to.be.empty
+                })
+            });
+
+        })        
     });
 
     describe('Empresa.novaFila - deve adicionar uma nova fila para a empresa', function porIdentificadorPessoal(done) {
