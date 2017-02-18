@@ -50,10 +50,33 @@ module.exports = function() {
            }
            
         })
-        //   this.model('Empresa').findOne({"_id": empresa_id}).then(function(result){          
-        //    return  error("a empresa não existe")
-        // }).catch(function(er){ error("a empresa não existe")})
       })
+    }
+
+    schema.methods.novaFila = function(fila){
+      that = this
+      return new Promise(function(sucess, error){
+        that.listaFilas().then(function(filas){
+          for(f in filas){
+            if( filas[f].nome === fila.nome){
+              error("fila já cadastrada!")
+            }
+          }
+          that._filas.push(fila) 
+          sucess(
+            that.save(function(err){
+              fila.save()
+            })
+          );
+
+          
+        })
+
+      });
+      
+     
+      // console.log(fila)
+      // return this.model('Empresa').update({_id: this.id}, { $set: {"_filas": fila}} )
     }
 
     var Empresa = mongoose.model('Empresa', schema);

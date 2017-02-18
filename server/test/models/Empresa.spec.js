@@ -75,9 +75,48 @@ describe('model.Empresa', function () {
         })        
     });
 
-    describe('Empresa.novaFila - deve adicionar uma nova fila para a empresa', function porIdentificadorPessoal(done) {
-        it('deve adicionar uma nova fila para empresa')        
-        it('deve exibir a mensagem "fila já cadastrada" quando for tentado adicionar uma fila com o mesmo nome de uma existente')
+    describe('Empresa.novaFila ', function novaFila() {
+        it('deve adicionar uma nova fila para empresa', function(){
+            var empresa = new Empresa()
+            empresa.nome = "Empresa teste"
+
+            var fila1 = new Fila()
+            fila1.nome = "TESTE"
+            fila1.tipo = "sequencial"
+
+            return empresa.save().then(function(){
+                return empresa.novaFila(fila1).then(function(){
+                    return empresa.listaFilas().then(function(result){
+                        expect(result).to.not.be.empty
+                        expect(result[0].nome).to.equal(fila1.nome)
+                    })
+                })
+            })
+        })        
+        it('deve exibir a mensagem "fila já cadastrada" quando for tentado adicionar uma fila com o mesmo nome de uma existente', function(){
+             var empresa = new Empresa()
+            empresa.nome = "Empresa teste"
+
+            var fila_teste = new Fila()
+            fila_teste.nome = "TESTE"
+            fila_teste.tipo = "sequencial"
+
+            var fila_repetida = new Fila()
+            fila_repetida.nome = "TESTE"
+            fila_repetida.tipo = "sequencial"
+
+            return empresa.save().then(function(){
+                return empresa.novaFila(fila_teste).then(function(){
+                    return empresa.novaFila(fila_repetida)
+                        .then(function(){})
+                        .catch(function(error){ 
+                            expect(error).to.equal("fila já cadastrada!")
+                        })
+                });
+            });
+
+
+        })
         it('deve exibir a mensagem "nome inválido" se o nome da fila tiver espaço)')
         it('deve exibir a mensagem "nome inválido" se o nome da fila tiver mais de 10 caracteres)')        
     });
