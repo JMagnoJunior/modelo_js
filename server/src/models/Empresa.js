@@ -39,7 +39,6 @@ module.exports = function() {
     schema.methods.listaFilas = function(){
       that = this
       return new Promise(function(sucess, error){
-        
          that.model('Empresa').findOne({"_id": that._id}).populate("_filas").exec(function(err, result){
            
            if(!result){
@@ -55,7 +54,13 @@ module.exports = function() {
 
     schema.methods.novaFila = function(fila){
       that = this
+
       return new Promise(function(sucess, error){
+        var erro_validacao = fila.validateSync();
+        if(erro_validacao){
+          error(erro_validacao.errors.nome.message)
+        }
+
         that.listaFilas().then(function(filas){
           for(f in filas){
             if( filas[f].nome === fila.nome){
@@ -67,9 +72,7 @@ module.exports = function() {
             that.save(function(err){
               fila.save()
             })
-          );
-
-          
+          );    
         })
 
       });

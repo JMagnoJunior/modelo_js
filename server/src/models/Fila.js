@@ -26,7 +26,18 @@ module.exports = function() {
       nome: {
         type: String, 
         uppercase: true,
-        required: true
+        required: true,
+        validate:{
+          validator: function(v){
+            var invalid  = /\s/
+            console.log(v)
+            console.log(invalid.test(v))
+            if(invalid.test(v)){
+              return false            
+            }
+          },
+          message: "nome inválido"
+        }
       },
       tipo: {
         type: String, 

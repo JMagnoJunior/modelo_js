@@ -1,7 +1,10 @@
-var expect = require('chai').expect;
+var chai = require('chai');
+var expect = chai.expect;
 var should = require('chai').should;
 var sinon = require('sinon');
 var mongoose = require('mongoose')
+var chaiAsPromised = require("chai-as-promised");
+chai.use(chaiAsPromised);
 
 
 require('../../config/database.js')("mongodb://localhost/querocomprar_test"); 
@@ -117,10 +120,25 @@ describe('model.Empresa', function () {
 
 
         })
-        it('deve exibir a mensagem "nome inválido" se o nome da fila tiver espaço)')
+        it('deve exibir a mensagem "nome inválido" se o nome da fila tiver espaço)', function(){
+             var empresa = new Empresa()
+            empresa.nome = "Empresa teste"
+
+            var fila_teste = new Fila()
+            fila_teste.nome = "TES TE"
+            fila_teste.tipo = "sequencial"
+
+            return empresa.save().then(function(){
+                return expect(empresa.novaFila(fila_teste)).to.be.rejectedWith("nome inválido")
+            })
+                // return empresa.novaFila(fila_teste).catch(function(err){
+                //     expect(err).to.equal("nome inválido")
+                // })
+            
+
+
+        })
         it('deve exibir a mensagem "nome inválido" se o nome da fila tiver mais de 10 caracteres)')        
     });
-
-
 
 });
