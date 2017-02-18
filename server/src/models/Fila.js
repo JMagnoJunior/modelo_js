@@ -30,10 +30,12 @@ module.exports = function() {
         validate:{
           validator: function(v){
             var invalid  = /\s/
-            console.log(v)
-            console.log(invalid.test(v))
+            var TAMANHO_MAXIMO = 10
             if(invalid.test(v)){
               return false            
+            }
+            if(v.length >= TAMANHO_MAXIMO){
+              return false
             }
           },
           message: "nome inválido"
@@ -47,33 +49,6 @@ module.exports = function() {
     });
 
     var Fila =  mongoose.model('Fila', schema);
-
-    // Fila.query = {}    
-    // Fila.add = {};
-    // Fila.query.byId = function(id){          
-    //    return Fila.findById({_id: id}).exec()
-    // }
-    // Fila.query.proximaPosicao = function(fila){
-    //   // precisa verificar o tipo de fila ainda. este codigo so serve pra sequencial 
-    //   if(fila.posicoes.length < 1){
-    //     return 1
-    //   }else{
-    //     return fila.posicoes.length + 1;
-    //   }
-    // }
-    // Fila.add.posicao = function(pessoa, id_fila, sucesso, erro){
-
-    //     Fila.query.byId(id_fila).then(function(fila){
-          
-    //       posicao = {"codigo": Fila.query.proximaPosicao(fila), "pessoa": pessoa }
-    //       fila.posicoes.push(posicao)
-    //       fila.save(function(err, updatedFila){
-    //         if(err){ erro(err)}
-    //         sucesso(posicao)
-    //       })
-          
-    //     }).catch(function(err){erro(err)})
-    // };
-
+    
     return Fila;
 };

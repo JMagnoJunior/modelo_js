@@ -117,7 +117,7 @@ describe('model.Empresa', function () {
 
         })
         it('deve exibir a mensagem "nome inválido" se o nome da fila tiver espaço)', function(){
-             var empresa = new Empresa()
+            var empresa = new Empresa()
             empresa.nome = "Empresa teste"
 
             var fila_teste = new Fila()
@@ -129,7 +129,19 @@ describe('model.Empresa', function () {
             })
 
         })
-        it('deve exibir a mensagem "nome inválido" se o nome da fila tiver mais de 10 caracteres)')        
+        it('deve exibir a mensagem "nome inválido" se o nome da fila tiver mais de 10 caracteres)', function(){
+            var empresa = new Empresa()
+            empresa.nome = "Empresa teste"
+
+            var fila_teste = new Fila()
+            fila_teste.nome = "12345678999"
+            fila_teste.tipo = "sequencial"
+
+            return empresa.save().then(function(){
+                return expect(empresa.novaFila(fila_teste)).to.be.rejectedWith("nome inválido")
+            })
+        })  
+
     });
 
 });
