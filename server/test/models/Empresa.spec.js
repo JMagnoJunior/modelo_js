@@ -110,11 +110,7 @@ describe('model.Empresa', function () {
 
             return empresa.save().then(function(){
                 return empresa.novaFila(fila_teste).then(function(){
-                    return empresa.novaFila(fila_repetida)
-                        .then(function(){})
-                        .catch(function(error){ 
-                            expect(error).to.equal("fila já cadastrada!")
-                        })
+                    return expect(empresa.novaFila(fila_repetida)).to.be.rejectedWith("fila já cadastrada!")
                 });
             });
 
@@ -131,11 +127,6 @@ describe('model.Empresa', function () {
             return empresa.save().then(function(){
                 return expect(empresa.novaFila(fila_teste)).to.be.rejectedWith("nome inválido")
             })
-                // return empresa.novaFila(fila_teste).catch(function(err){
-                //     expect(err).to.equal("nome inválido")
-                // })
-            
-
 
         })
         it('deve exibir a mensagem "nome inválido" se o nome da fila tiver mais de 10 caracteres)')        
